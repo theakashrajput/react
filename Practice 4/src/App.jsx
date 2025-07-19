@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Create from "./components/Create";
 import Read from "./components/Read";
-import nanoId from "nano-id";
-
 const App = () => {
   const [taskData, setTaskData] = useState([]);
 

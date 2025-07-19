@@ -1,5 +1,4 @@
 import nanoId from "nano-id";
-import React from "react";
 import { useForm } from "react-hook-form";
 
 const Create = (props) => {
@@ -31,7 +30,7 @@ const Create = (props) => {
       </h1>
       <form onSubmit={handleSubmit(handleForm)}>
         <input
-          {...register("title", { required: "Please enter data" })}
+          {...register("title", { required: "Title cann't be empty" })}
           type="text"
           className="bg-amber-50 py-2 px-3 text-lg rounded-sm"
         />
@@ -39,6 +38,7 @@ const Create = (props) => {
           Add
         </button>
       </form>
+      <small className="text-red-400">{errors?.title?.message}</small>
     </div>
   );
 };

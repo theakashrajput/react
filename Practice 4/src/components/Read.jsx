@@ -1,5 +1,3 @@
-import React from "react";
-
 const Read = (props) => {
   const { taskData, setTaskData } = props;
 
