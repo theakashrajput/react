@@ -6,19 +6,23 @@ const RenderData = (props) => {
   };
 
   const handleToggle = (id) => {
-    setToDos(toDos.map(ele=>{
-      if(ele.id === id){
-        ele.isCompleted = !ele.isCompleted
-      }
-      return ele;
-    }))
+    setToDos(
+      toDos.map((ele) => {
+        if (ele.id === id) {
+          ele.isCompleted = !ele.isCompleted;
+        }
+        return ele;
+      })
+    );
   };
   const renderToDos = toDos.map((ele) => (
     <div key={ele.id} className="flex items-center justify-between">
       {/* Task Text with Ellipsis and Hover Expansion */}
       <div
-        onClick={()=>handleToggle(ele.id)}
-        className={`max-w-[75%] cursor-pointer truncate ${ele.isCompleted ? "line-through" : ""}`}
+        onClick={() => handleToggle(ele.id)}
+        className={`max-w-[75%] cursor-pointer truncate ${
+          ele.isCompleted ? "line-through" : ""
+        }`}
         title={ele.task}
       >
         {ele.task}

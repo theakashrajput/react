@@ -7,7 +7,7 @@ const UserInputComp = (props) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    if (userInput !== "") {
+    if (userInput.trim() !== "") {
       const newToDo = {
         id: nanoid(),
         task: userInput,
