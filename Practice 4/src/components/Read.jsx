@@ -1,8 +1,12 @@
-const Read = (props) => {
-  const { taskData, setTaskData } = props;
+import { useContext } from "react";
+import { toast } from "react-toastify";
+import { toDOContext } from "../Wrapper";
 
+const Read = () => {
+  const { taskData, setTaskData } = useContext(toDOContext);
   const handleDelete = (id) => {
     setTaskData(taskData.filter((ele) => ele.id !== id));
+    toast.error("ToDO deleted successfully");
   };
 
   const handleLine = (id) => {
@@ -28,12 +32,21 @@ const Read = (props) => {
         >
           {ele.title}
         </h4>
-        <button
-          onClick={() => handleDelete(ele.id)}
-          className={`bg-red-600 text-zinc-200 py-2 px-3 rounded-md ml-6 font-semibold text-sm tracking-wide cursor-pointer active:scale-[0.95] `}
-        >
-          Delete
-        </button>
+        {ele.isCompleted ? (
+          <button
+            onClick={() => handleDelete(ele.id)}
+            className={`bg-red-600 text-zinc-200 py-2 px-3 rounded-md ml-6 font-semibold text-sm tracking-wide cursor-pointer active:scale-[0.95] `}
+          >
+            Delete
+          </button>
+        ) : (
+          <button
+            onClick={() => handleLine(ele.id)}
+            className={`bg-yellow-600 text-zinc-200 py-2 px-3 rounded-md ml-6 font-semibold text-sm tracking-wide cursor-pointer active:scale-[0.95] `}
+          >
+            Complete
+          </button>
+        )}
       </div>
     );
   });
@@ -45,7 +58,12 @@ const Read = (props) => {
           Your Tasks:
         </h1>
         <button
-          onClick={() => setTaskData([])}
+          onClick={() => {
+            if (taskData.length) {
+              toast.dark("All task deleted");
+              setTaskData([]);
+            }
+          }}
           className="bg-orange-400 text-zinc-200 py-2 px-3 rounded-md ml-6 font-semibold tracking-wide cursor-pointer active:scale-[0.95]"
         >
           Clear All

@@ -1,8 +1,11 @@
 import nanoId from "nano-id";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { toDOContext } from "../Wrapper";
 
-const Create = (props) => {
-  const { taskData, setTaskData } = props;
+const Create = () => {
+  const { taskData, setTaskData } = useContext(toDOContext);
   const {
     register,
     handleSubmit,
@@ -19,6 +22,8 @@ const Create = (props) => {
     data.isCompleted = false;
 
     setTaskData([...taskData, data]);
+
+    toast.success("ToDO Created successfully");
 
     reset();
   };
@@ -38,7 +43,9 @@ const Create = (props) => {
           Add
         </button>
       </form>
-      <small className="text-red-400">{errors?.title?.message}</small>
+      {errors?.title?.message && (
+        <small className="text-red-400">{errors?.title?.message}</small>
+      )}
     </div>
   );
 };
